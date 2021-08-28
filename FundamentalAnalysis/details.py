@@ -234,7 +234,7 @@ def discounted_cash_flow(ticker, api_key, period="annual", limit=0):
 
     try:
         del data_json_current['symbol']
-        data_json_current['DCF'] = data_json_current.pop('dcf')
+        #data_json_current['DCF'] = data_json_current.pop('dcf')
         data_json_current_v2 = data_v2[0]
         data_json_current['DCF'] = data_json_current_v2['dcf']
     except KeyError:
