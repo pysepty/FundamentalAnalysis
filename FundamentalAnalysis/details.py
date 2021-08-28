@@ -267,6 +267,7 @@ def discounted_cash_flow(ticker, api_key, period="annual", limit=0):
         current_year = data_json_current['date'][:7]
     else:
         current_year = data_json_current['date'][:4]
+    current_year = current_year+"e"
     data_formatted[current_year] = data_json_current
 
     for data in data_json:
