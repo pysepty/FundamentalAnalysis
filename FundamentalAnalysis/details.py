@@ -220,6 +220,9 @@ def discounted_cash_flow(ticker, api_key, period="annual", limit=0):
         response = urlopen(f"https://financialmodelingprep.com/api/v3/discounted-cash-flow/{ticker}"
                            f"?period={period}&limit={limit}&apikey={api_key}")
         data = json.loads(response.read().decode("utf-8"))
+        response = urlopen(f"https://financialmodelingprep.com/api/v3/historical-daily-discounted-cash-flow/{ticker}"
+                           f"?limit={limit}&apikey={api_key}")
+        data_v2 = json.loads(response.read().decode("utf-8"))
     except HTTPError:
         raise ValueError("This endpoint is only for premium members. Please visit the subscription page to upgrade the "
                          "plan (Starter or higher) at https://financialmodelingprep.com/developer/docs/pricing")
@@ -232,6 +235,8 @@ def discounted_cash_flow(ticker, api_key, period="annual", limit=0):
     try:
         del data_json_current['symbol']
         data_json_current['DCF'] = data_json_current.pop('dcf')
+        data_json_current_v2 = data_v2[0]
+        data_json_current['DCF'] = data_json_current_v2['dcf']
     except KeyError:
         pass
 
