@@ -254,7 +254,8 @@ def discounted_cash_flow(ticker, api_key, period="annual", limit=0):
       del dummy['symbol']
       dummy['DCF'] = dummy.pop('dcf')
       dummy['Stock Price'] = dummy.pop('price')
-
+    data_json = data
+    
     data_formatted = {}
 
     if period == "quarter":
